@@ -1,23 +1,76 @@
-"use strict";
-
-console.log('=========> This is working <========');
-var appObj = {
+const appObj = {
   title: 'Indescion APP',
-  subtitle: 'The greates descision making App out there'
+  subtitle: 'The greates descision making App out there',
+  options: ['One', 'Two']
 };
-var template = React.createElement("div", null, React.createElement("h1", null, appObj.title), React.createElement("p", null, appObj.subtitle), React.createElement("ol", null, React.createElement("li", null, "Item One"), React.createElement("li", null, "Item Two"), React.createElement("li", null, "Item Three"), React.createElement("li", null, "Item Four")));
-var user = {
-  name: 'Max Muster',
-  age: 90 // location: 'Berlin'
+const template = React.createElement(
+  'div',
+  null,
+  React.createElement('h1', null, appObj.title),
+  appObj.subtitle && React.createElement('p', null, appObj.subtitle),
+  React.createElement(
+    'p',
+    null,
+    appObj.options.length > 0 ? 'Here are your options' : 'No options'
+  ),
+  React.createElement(
+    'ol',
+    null,
+    React.createElement('li', null, 'Item One'),
+    React.createElement('li', null, 'Item Two'),
+    React.createElement('li', null, 'Item Three'),
+    React.createElement('li', null, 'Item Four')
+  )
+);
+let count = 0;
 
+const addOne = function addOne() {
+  count++;
+  renderCounterApp();
 };
 
-function getLocation(location) {
-  return location ? React.createElement("p", null, "Location: ", location) : undefined;
-}
+const minusOne = function minusOne() {
+  count--;
+  renderCounterApp();
+};
 
-var templateTwo = React.createElement("div", null, React.createElement("h1", null, user.name), React.createElement("p", null, "Age: ", user.age), getLocation(user.location));
-var appRoot = document.querySelector('#app');
-var appRootTwo = document.querySelector('#appTwo');
+const reset = function reset() {
+  count = 0;
+  renderCounterApp();
+};
+
+const appRoot = document.querySelector('#app');
+const appRootTwo = document.querySelector('#appTwo');
 ReactDOM.render(template, appRoot);
-ReactDOM.render(templateTwo, appRootTwo);
+
+var renderCounterApp = function renderCounterApp() {
+  const templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement('h1', null, 'Count: ', count),
+    React.createElement(
+      'button',
+      {
+        onClick: addOne
+      },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: minusOne
+      },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      {
+        onClick: reset
+      },
+      'Reset'
+    )
+  );
+  ReactDOM.render(templateTwo, appRootTwo);
+};
+
+renderCounterApp();

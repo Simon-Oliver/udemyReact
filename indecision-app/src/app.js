@@ -2,13 +2,15 @@ console.log('=========> This is working <========');
 
 const appObj = {
   title: 'Indescion APP',
-  subtitle: 'The greates descision making App out there'
+  subtitle: 'The greates descision making App out there',
+  options: ['One', 'Two']
 };
 
 const template = (
   <div>
     <h1>{appObj.title}</h1>
-    <p>{appObj.subtitle}</p>
+    {appObj.subtitle && <p>{appObj.subtitle}</p>}
+    <p>{appObj.options.length > 0 ? 'Here are your options' : 'No options'}</p>
     <ol>
       <li>Item One</li>
       <li>Item Two</li>
@@ -18,27 +20,39 @@ const template = (
   </div>
 );
 
-const user = {
-  name: 'Max Muster',
-  age: 90
-  // location: 'Berlin'
+let count = 0;
+const addOne = () => {
+  count++;
+  renderCounterApp();
 };
 
-function getLocation(location) {
-  return location ? <p>Location: {location}</p> : undefined;
-}
+const minusOne = () => {
+  count--;
+  renderCounterApp();
+};
 
-const templateTwo = (
-  <div>
-    <h1>{user.name}</h1>
-    <p>Age: {user.age}</p>
-    {getLocation(user.location)}
-  </div>
-);
+const reset = () => {
+  count = 0;
+  renderCounterApp();
+};
 
 const appRoot = document.querySelector('#app');
 const appRootTwo = document.querySelector('#appTwo');
 
 ReactDOM.render(template, appRoot);
 
-ReactDOM.render(templateTwo, appRootTwo);
+const renderCounterApp = () => {
+  const templateTwo = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={addOne}>+1</button>
+      <button onClick={minusOne}>-1</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+  ReactDOM.render(templateTwo, appRootTwo);
+};
+
+renderCounterApp();
+
+var simon = 'ss';
