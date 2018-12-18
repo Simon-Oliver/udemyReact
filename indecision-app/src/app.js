@@ -1,9 +1,16 @@
 console.log('=========> This is working <========');
-
 const appObj = {
   title: 'Indescion APP',
   subtitle: 'The greates descision making App out there',
   options: ['One', 'Two']
+};
+
+const onFormSubmit = e => {
+  e.preventDefault();
+  const option = e.target.elements.option.value;
+  if (option) {
+    appObj.options.push(option);
+  }
 };
 
 const template = (
@@ -17,42 +24,12 @@ const template = (
       <li>Item Three</li>
       <li>Item Four</li>
     </ol>
+    <form onSubmit={onFormSubmit}>
+      <input type="text" name="option" />
+      <button>Add Option</button>
+    </form>
   </div>
 );
 
-let count = 0;
-const addOne = () => {
-  count++;
-  renderCounterApp();
-};
-
-const minusOne = () => {
-  count--;
-  renderCounterApp();
-};
-
-const reset = () => {
-  count = 0;
-  renderCounterApp();
-};
-
 const appRoot = document.querySelector('#app');
-const appRootTwo = document.querySelector('#appTwo');
-
 ReactDOM.render(template, appRoot);
-
-const renderCounterApp = () => {
-  const templateTwo = (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>Reset</button>
-    </div>
-  );
-  ReactDOM.render(templateTwo, appRootTwo);
-};
-
-renderCounterApp();
-
-var simon = 'ss';
