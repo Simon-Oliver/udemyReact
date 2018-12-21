@@ -18,93 +18,61 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-var Counter =
+var Toggle =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Counter, _React$Component);
+  _inherits(Toggle, _React$Component);
 
-  function Counter(props) {
+  function Toggle(props) {
     var _this;
 
-    _classCallCheck(this, Counter);
+    _classCallCheck(this, Toggle);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Counter).call(this, props));
-    _this.plusOne = _this.plusOne.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.resetCount = _this.resetCount.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Toggle).call(this, props));
+    _this.showHidden = _this.showHidden.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
-      count: 0
+      showing: false
     };
     return _this;
   }
 
-  _createClass(Counter, [{
-    key: "plusOne",
-    value: function plusOne() {
+  _createClass(Toggle, [{
+    key: "showHidden",
+    value: function showHidden() {
       this.setState(function (prevState) {
         return {
-          count: prevState.count + 1
-        };
-      });
-    }
-  }, {
-    key: "minusOne",
-    value: function minusOne() {
-      this.setState(function (prevState) {
-        return {
-          count: prevState.count - 1
-        };
-      });
-    }
-  }, {
-    key: "resetCount",
-    value: function resetCount() {
-      this.setState(function () {
-        return {
-          count: 0
+          showing: !prevState.showing
         };
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return React.createElement("div", null, React.createElement("h1", null, "Count: ", this.state.count), React.createElement("button", {
-        onClick: this.plusOne
-      }, "+1"), React.createElement("button", {
-        onClick: this.minusOne
-      }, "-1"), React.createElement("button", {
-        onClick: this.resetCount
-      }, " Reset"));
+      return React.createElement("div", null, React.createElement("h1", null, "Welcome"), ' ', React.createElement("button", {
+        onClick: this.showHidden
+      }, this.state.showing ? 'Hide' : 'Show what is hidden', ' '), this.state.showing && React.createElement("p", null, "It's me!!!"));
     }
   }]);
 
-  return Counter;
+  return Toggle;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.querySelector('#app')); // const appRootTwo = document.querySelector('#appTwo');
-// let count = 0;
-// const addOne = () => {
-//   count++;
-//   renderCounterApp();
+ReactDOM.render(React.createElement(Toggle, null), document.querySelector('#app')); // const appRoot = document.querySelector('#app');
+// let showing = true;
+// const showHidden = () => {
+//   showing = !showing;
+//   renderTemplate();
 // };
-// const minusOne = () => {
-//   count--;
-//   renderCounterApp();
-// };
-// const reset = () => {
-//   count = 0;
-//   renderCounterApp();
-// };
-// ReactDOM.render(template, appRoot);
-// const renderCounterApp = () => {
-//   const templateTwo = (
-//     <div>
-//       <h1>Count: {count}</h1>
-//       <button onClick={addOne}>+1</button>
-//       <button onClick={minusOne}>-1</button>
-//       <button onClick={reset}>Reset</button>
-//     </div>
+// const renderTemplate = () => {
+//   const template = (
+//     <>
+//       <h1>Welcome</h1>
+//       <button onClick={showHidden}>
+//         {showing ? 'Hide' : 'Show what is hidden'}
+//       </button>
+//       {showing && <p>It's me!!!</p>}
+//     </>
 //   );
-//   ReactDOM.render(templateTwo, appRootTwo);
+//   ReactDOM.render(template, appRoot);
 // };
-// renderCounterApp();
+// renderTemplate();
