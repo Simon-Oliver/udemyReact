@@ -18,61 +18,221 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-var Toggle =
+var IndecisionApp =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Toggle, _React$Component);
+  _inherits(IndecisionApp, _React$Component);
 
-  function Toggle(props) {
+  function IndecisionApp(props) {
     var _this;
 
-    _classCallCheck(this, Toggle);
+    _classCallCheck(this, IndecisionApp);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Toggle).call(this, props));
-    _this.showHidden = _this.showHidden.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(IndecisionApp).call(this, props));
+    _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handlePick = _this.handlePick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleAddOption = _this.handleAddOption.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
-      showing: false
+      options: []
     };
     return _this;
   }
 
-  _createClass(Toggle, [{
-    key: "showHidden",
-    value: function showHidden() {
+  _createClass(IndecisionApp, [{
+    key: "handleDeleteOptions",
+    value: function handleDeleteOptions() {
       this.setState(function (prevState) {
         return {
-          showing: !prevState.showing
+          options: []
+        };
+      });
+    }
+  }, {
+    key: "handlePick",
+    value: function handlePick() {
+      var randomNum = Math.floor(Math.random() * this.state.options.length);
+      var option = this.state.options[randomNum];
+      console.log(randomNum);
+      alert(option);
+    }
+  }, {
+    key: "handleAddOption",
+    value: function handleAddOption(option) {
+      if (!option) {
+        return 'Enter valid value to add item';
+      } else if (this.state.options.indexOf(option) > -1) {
+        return 'This option already exists';
+      }
+
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.concat(option)
         };
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return React.createElement("div", null, React.createElement("h1", null, "Welcome"), ' ', React.createElement("button", {
-        onClick: this.showHidden
-      }, this.state.showing ? 'Hide' : 'Show what is hidden', ' '), this.state.showing && React.createElement("p", null, "It's me!!!"));
+      var title = 'Indecision';
+      var subTitle = 'Let a machine choose for you!!!';
+      return React.createElement("div", null, React.createElement(Header, {
+        title: title,
+        subTitle: subTitle
+      }), React.createElement(Action, {
+        hasOptions: this.state.options.length > 0,
+        handlePick: this.handlePick
+      }), React.createElement(Options, {
+        options: this.state.options,
+        handleDeleteOptions: this.handleDeleteOptions
+      }), React.createElement(AddOptions, {
+        handleAddOption: this.handleAddOption
+      }));
     }
   }]);
 
-  return Toggle;
+  return IndecisionApp;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Toggle, null), document.querySelector('#app')); // const appRoot = document.querySelector('#app');
-// let showing = true;
-// const showHidden = () => {
-//   showing = !showing;
-//   renderTemplate();
-// };
-// const renderTemplate = () => {
-//   const template = (
-//     <>
-//       <h1>Welcome</h1>
-//       <button onClick={showHidden}>
-//         {showing ? 'Hide' : 'Show what is hidden'}
-//       </button>
-//       {showing && <p>It's me!!!</p>}
-//     </>
-//   );
-//   ReactDOM.render(template, appRoot);
-// };
-// renderTemplate();
+var Header =
+/*#__PURE__*/
+function (_React$Component2) {
+  _inherits(Header, _React$Component2);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Header).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(React.Fragment, null, React.createElement("h1", null, this.props.title), React.createElement("p", null, this.props.subTitle));
+    }
+  }]);
+
+  return Header;
+}(React.Component);
+
+var Action =
+/*#__PURE__*/
+function (_React$Component3) {
+  _inherits(Action, _React$Component3);
+
+  function Action() {
+    _classCallCheck(this, Action);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Action).apply(this, arguments));
+  }
+
+  _createClass(Action, [{
+    key: "render",
+    value: function render() {
+      return React.createElement("div", null, React.createElement("button", {
+        onClick: this.props.handlePick,
+        disabled: !this.props.hasOptions
+      }, "What should I do?"));
+    }
+  }]);
+
+  return Action;
+}(React.Component);
+
+var Options =
+/*#__PURE__*/
+function (_React$Component4) {
+  _inherits(Options, _React$Component4);
+
+  function Options() {
+    _classCallCheck(this, Options);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Options).apply(this, arguments));
+  }
+
+  _createClass(Options, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(React.Fragment, null, React.createElement("button", {
+        onClick: this.props.handleDeleteOptions
+      }, "Remove All"), this.props.options.map(function (e) {
+        return React.createElement(Option, {
+          key: e,
+          optionText: e
+        });
+      }));
+    }
+  }]);
+
+  return Options;
+}(React.Component);
+
+var Option =
+/*#__PURE__*/
+function (_React$Component5) {
+  _inherits(Option, _React$Component5);
+
+  function Option() {
+    _classCallCheck(this, Option);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Option).apply(this, arguments));
+  }
+
+  _createClass(Option, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(React.Fragment, null, React.createElement("p", null, "Option: ", this.props.optionText));
+    }
+  }]);
+
+  return Option;
+}(React.Component);
+
+var options = [];
+
+var AddOptions =
+/*#__PURE__*/
+function (_React$Component6) {
+  _inherits(AddOptions, _React$Component6);
+
+  function AddOptions(props) {
+    var _this2;
+
+    _classCallCheck(this, AddOptions);
+
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(AddOptions).call(this, props));
+    _this2.handleAddOption = _this2.handleAddOption.bind(_assertThisInitialized(_assertThisInitialized(_this2)));
+    _this2.state = {
+      error: undefined
+    };
+    return _this2;
+  }
+
+  _createClass(AddOptions, [{
+    key: "handleAddOption",
+    value: function handleAddOption(e) {
+      e.preventDefault();
+      var option = e.target.elements.option.value.trim();
+      var error = this.props.handleAddOption(option);
+      this.setState(function () {
+        return {
+          error: error
+        };
+      });
+      e.target.elements.option.value = '';
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement("div", null, React.createElement("form", {
+        onSubmit: this.handleAddOption
+      }, React.createElement("input", {
+        type: "text",
+        name: "option"
+      }), React.createElement("button", null, "Add Option"), this.state.error && React.createElement("p", null, this.state.error)));
+    }
+  }]);
+
+  return AddOptions;
+}(React.Component);
+
+ReactDOM.render(React.createElement(IndecisionApp, null), document.querySelector('#app'));
