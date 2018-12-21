@@ -32,29 +32,43 @@ function (_React$Component) {
     _this.plusOne = _this.plusOne.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.resetCount = _this.resetCount.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      count: 0
+    };
     return _this;
   }
 
   _createClass(Counter, [{
     key: "plusOne",
     value: function plusOne() {
-      console.log('PlusOne');
-      console.log(this);
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count + 1
+        };
+      });
     }
   }, {
     key: "minusOne",
     value: function minusOne() {
-      console.log('minusOne');
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count - 1
+        };
+      });
     }
   }, {
     key: "resetCount",
     value: function resetCount() {
-      console.log('resetCount');
+      this.setState(function () {
+        return {
+          count: 0
+        };
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return React.createElement("div", null, React.createElement("h1", null, "Count:"), React.createElement("button", {
+      return React.createElement("div", null, React.createElement("h1", null, "Count: ", this.state.count), React.createElement("button", {
         onClick: this.plusOne
       }, "+1"), React.createElement("button", {
         onClick: this.minusOne
