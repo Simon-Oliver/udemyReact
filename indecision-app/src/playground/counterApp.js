@@ -10,7 +10,7 @@ class Counter extends React.Component {
   }
 
   componentDidMount() {
-    const count = parseInt(localStorage.getItem('count'));
+    const count = parseInt(localStorage.getItem('count'), 10);
     if (count) {
       this.setState(() => ({ count }));
     }
