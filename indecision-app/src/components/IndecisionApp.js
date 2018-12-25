@@ -1,20 +1,14 @@
 import React from 'react';
-import AddOptions from './components/AddOptions';
-import Action from './components/Action';
-import Header from './components/Header';
-import Options from './components/Options';
+import AddOptions from './AddOptions';
+import Action from './Action';
+import Header from './Header';
+import Options from './Options';
 
 class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-    this.state = {
-      options: [] //props.options
-    };
-  }
+  state = {
+    options: [] //props.options
+  };
+
   componentDidMount() {
     try {
       const json = localStorage.getItem('options');
@@ -34,21 +28,21 @@ class IndecisionApp extends React.Component {
     }
   }
 
-  handleDeleteOptions() {
+  handleDeleteOptions = () => {
     this.setState(() => ({ options: [] }));
-  }
-  handleDeleteOption(option) {
+  };
+  handleDeleteOption = option => {
     this.setState(prevState => ({
       options: prevState.options.filter(e => option !== e)
     }));
-  }
-  handlePick() {
+  };
+  handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
     alert(option);
-  }
+  };
 
-  handleAddOption(option) {
+  handleAddOption = option => {
     if (!option) {
       return 'Enter valid value to add item';
     } else if (this.state.options.indexOf(option) > -1) {
@@ -56,7 +50,7 @@ class IndecisionApp extends React.Component {
     }
 
     this.setState(prevState => ({ options: prevState.options.concat(option) }));
-  }
+  };
 
   render() {
     const subTitle = 'Let a machine choose for you!!!';
