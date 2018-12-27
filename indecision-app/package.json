@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@types/react": "^16.7.17",
+    "normalize.css": "^8.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-modal": "^3.8.1",
