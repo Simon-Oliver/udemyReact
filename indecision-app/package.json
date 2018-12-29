@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildCount": "npx babel src/playground/counterApp.js  --out-file=public/scripts/app.js --presets=@babel/env,@babel/react --watch",
     "build": "webpack",
-    "dev-server": "webpack-dev-server --mode=development"
+    "dev-server": "webpack-dev-server --mode=development --host 0.0.0.0"
   },
   "author": "",
   "license": "ISC",
